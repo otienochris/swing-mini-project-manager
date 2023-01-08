@@ -1,4 +1,8 @@
 # MINI PROJECT MANAGER
+## Description
+A mini-project manager that allows a lecturer create and manage projects, assign and unassign projects to students.
+
+A project done to get the gist of window builder, a toool to design swing GUI
 
 ## How to run
 
