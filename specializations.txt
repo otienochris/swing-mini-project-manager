@@ -1,0 +1,4 @@
+ID<>Short Description<>Description
+900<>AI<>Artificial Intelligence
+901<>COMP_NET<>Computer Networks
+902<>COMP_SEC<>Computer Security

@@ -1,0 +1,4 @@
+ID<>Username<>Full Name<>Password<>Role<>Gender<>Specialization
+100<>johny<>John Doe<>pass<>A<>female<>COMP_SEC
+102<>salomegit<>Salome Git<>pass<>S<>female<>AI
+103<>otis<>otis James<>pass<>L<>other<>AI

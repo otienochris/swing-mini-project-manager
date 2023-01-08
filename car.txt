@@ -1,0 +1,3 @@
+id,name,price,isAvailable
+103,new subaru,10.6,booked
+104,Toyota V8,15.7,available
