@@ -44,6 +44,9 @@ public class UsersFrame{
         // initialize specializations
         specializations = MiniProjectManagementSystem.getData(MiniProjectManagementSystem.SPECIALIZATION_TXT_FILE);
         
+        // initialize users
+        
+        
         
         // add and edit popup
         JFrame editUserPopup = new JFrame();
@@ -123,22 +126,30 @@ public class UsersFrame{
             
             String windowTitle = editUserPopup.getTitle();
             if(windowTitle.contains("Add")){
-                int nextId = MiniProjectManagementSystem.getNextId(USER_TXT_FILE);
-                String randomPassword = MiniProjectManagementSystem.randomPassword(8);
-                String newUser = "\n" + nextId + FILE_DELIMITER 
-                        + usernameTxt.getText() + FILE_DELIMITER 
-                        + nameTxt.getText() + FILE_DELIMITER 
-                        + randomPassword + FILE_DELIMITER 
-                        + ((String)roleTxt.getSelectedItem()).charAt(0) + FILE_DELIMITER 
-                        + gender.getSelectedItem() + FILE_DELIMITER 
-                        + getSpecializationShortDescription((String)specializationTxt.getSelectedItem());
-                boolean success = MiniProjectManagementSystem.writeLineToFile(USER_TXT_FILE, newUser);
-                if(success) {
-                    JOptionPane.showMessageDialog(null, "Copy and share this password: " + randomPassword, "Password for " + nameTxt.getText(), JOptionPane.INFORMATION_MESSAGE);
-                    editUserPopup.dispose();
-                    new UsersFrame();
+                
+                String username = usernameTxt.getText();
+                
+                if(usernameExists(username)){
+                    JOptionPane.showMessageDialog(null, "Username exists", "Adding new user", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error Saving, try again", "Adding new user", JOptionPane.ERROR_MESSAGE);
+                
+                    int nextId = MiniProjectManagementSystem.getNextId(USER_TXT_FILE);
+                    String randomPassword = MiniProjectManagementSystem.randomPassword(8);
+                    String newUser = "\n" + nextId + FILE_DELIMITER 
+                            + username + FILE_DELIMITER 
+                            + nameTxt.getText() + FILE_DELIMITER 
+                            + randomPassword + FILE_DELIMITER 
+                            + ((String)roleTxt.getSelectedItem()).charAt(0) + FILE_DELIMITER 
+                            + gender.getSelectedItem() + FILE_DELIMITER 
+                            + getSpecializationShortDescription((String)specializationTxt.getSelectedItem());
+                    boolean success = MiniProjectManagementSystem.writeLineToFile(USER_TXT_FILE, newUser);
+                    if(success) {
+                        JOptionPane.showMessageDialog(null, "Copy and share this password: " + randomPassword, "Password for " + nameTxt.getText(), JOptionPane.INFORMATION_MESSAGE);
+                        editUserPopup.dispose();
+                        new UsersFrame();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error Saving, try again", "Adding new user", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             
             } else if (windowTitle.contains("Edit")){
@@ -311,5 +322,14 @@ public class UsersFrame{
                     .collect(Collectors.toList())
                     .get(0) // get the specialization record
                     .split(FILE_DELIMITER)[2]; // get the specialization id
+    }
+    
+    private static boolean usernameExists(String newUsername) {
+        List<String> usersList = MiniProjectManagementSystem.getData(MiniProjectManagementSystem.USER_TXT_FILE).stream()
+                .filter(user -> user.split(MiniProjectManagementSystem.FILE_DELIMITER)[1].equals(newUsername))
+                .collect(Collectors.toList());
+        
+        System.out.println("usernames found: " + usersList.size());
+        return !usersList.isEmpty();
     }
 }

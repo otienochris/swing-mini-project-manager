@@ -16,8 +16,10 @@ public class StudentLecturerMainFrame extends javax.swing.JFrame {
     private final String USERS = "users";
     private final String PROJECTS = "projects";
     private final String MY_PROJECTS = "myProjects";
+    private final String MY_PROFILE = "profile";
     private List<String> allProjects;
     private String loggedInUserRole = MiniProjectManagementSystem.loggedInUserRole;
+
     
     /**
      * Creates new form LecturerMainFrame
@@ -109,6 +111,11 @@ public class StudentLecturerMainFrame extends javax.swing.JFrame {
         btnProfile.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         btnProfile.setText("My Profile");
         btnProfile.setFocusable(false);
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
 
         loggedUsername.setFont(new java.awt.Font("Monospaced", 2, 14)); // NOI18N
         loggedUsername.setText("jLabel3");
@@ -273,6 +280,11 @@ public class StudentLecturerMainFrame extends javax.swing.JFrame {
         new AddProjectFrame().setVisible(true);
         
     }//GEN-LAST:event_btnAddProjectActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        mainPanel.add(new ProfilePanel(), MY_PROFILE);
+        cardLayout.show(mainPanel, MY_PROFILE);
+    }//GEN-LAST:event_btnProfileActionPerformed
 
     /**
      * @param args the command line arguments

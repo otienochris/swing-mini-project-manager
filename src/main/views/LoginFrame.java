@@ -155,7 +155,7 @@ public class LoginFrame extends JFrame implements ActionListener {
      * @return true if the credentials are valid
      * 
      */
-    private boolean areCredentialsValid(String username, String password) {
+    public static boolean areCredentialsValid(String username, String password) {
         boolean[] response = {false};
         String [] userDetails =  new String[3];
         List<String> dataFromDb = MiniProjectManagementSystem.getData(MiniProjectManagementSystem.USER_TXT_FILE);
